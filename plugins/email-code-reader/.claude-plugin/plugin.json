@@ -1,6 +1,6 @@
 {
   "name": "email-code-reader",
-  "description": "Provider for email.verification_code@1 — reads ATS verification codes from Gmail via ego lite.",
+  "description": "Providers for email.verification_code@1 and email.sent_marker@1 — reads ATS verification codes and Sent-folder tripwire markers from Gmail via ego lite.",
   "version": "0.1.0",
   "author": { "name": "yitaohou" }
 }
