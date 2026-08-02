@@ -43,8 +43,12 @@ Rules:
   machine, and the two drift). Do not widen or narrow this tolerance.
 - If more than one message matches, return AMBIGUOUS. Do not guess which one is right,
   not by recency, not by position, not by any heuristic.
-- If nothing matches, retry at most twice, waiting 10 seconds and refreshing the inbox
-  between attempts, then return NOT_FOUND.
+- If nothing matches yet, keep checking: refresh and re-run the search about every
+  15 seconds, preferably as a bounded wait-loop inside a single script. Never return
+  NOT_FOUND or STALE_ONLY until you have observed the mailbox at a moment at least
+  180 seconds after not_before — at delegation time the message is usually still in
+  transit. OK, AMBIGUOUS, and MAILBOX_UNREACHABLE may be returned as soon as
+  established.
 - Never write the code anywhere. Return it and nothing else.
 - Keep no state between calls. Each call is independent.
 
