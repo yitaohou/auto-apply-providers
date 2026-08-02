@@ -62,8 +62,11 @@ ERR AMBIGUOUS
 ERR MAILBOX_UNREACHABLE
 
 Return STALE_ONLY when a message matched the sender field and subject but arrived
-before the tolerance window. Return NOT_FOUND when nothing matched at all, or when a message
-matched but no verification code could be identified in it.
+before the tolerance window. Return NOT_FOUND when nothing matched at all, or when a
+message matched but no verification code could be identified in it. A codeless match
+counts toward neither OK nor AMBIGUOUS; if that is all the window holds, return
+NOT_FOUND even when older matches exist outside the window — STALE_ONLY only when
+nothing matched inside the window at all.
 
 Use MAILBOX_UNREACHABLE when the mailbox is not logged in, the mail account itself
 raises a 2FA challenge, or ego lite is unavailable. Never attempt to log into the mail
