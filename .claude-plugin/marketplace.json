@@ -1,0 +1,11 @@
+{
+  "name": "auto-apply-providers",
+  "owner": { "name": "yitaohou" },
+  "plugins": [
+    {
+      "name": "email-code-reader",
+      "source": "./plugins/email-code-reader",
+      "description": "Provider for email.verification_code@1 — reads ATS verification codes from Gmail via ego lite."
+    }
+  ]
+}
