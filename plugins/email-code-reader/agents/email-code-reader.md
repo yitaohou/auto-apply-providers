@@ -1,10 +1,11 @@
 ---
 name: email-code-reader
-description: Reads an ATS verification code from a Gmail mailbox using ego lite.
-             Takes ATS, employer, sender domain, subject keyword, and a not_before
-             timestamp; returns one verification code or one error code.
-             Read-only. Never sends mail.
-             implements: email.verification_code@1
+description: >-
+  Reads an ATS verification code from a Gmail mailbox using ego lite.
+  Takes ATS, employer, sender domain, subject keyword, and a not_before
+  timestamp; returns one verification code or one error code.
+  Read-only. Never sends mail.
+  implements: email.verification_code@1
 model: sonnet
 maxTurns: 12
 ---
