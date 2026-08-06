@@ -6,6 +6,11 @@
       "name": "email-code-reader",
       "source": "./plugins/email-code-reader",
       "description": "Provider for email.verification_code@1 — reads ATS verification codes from Gmail via ego lite."
+    },
+    {
+      "name": "job-searcher",
+      "source": "./plugins/job-searcher",
+      "description": "Provider for job.search@1 — browses LinkedIn and Indeed with ego lite and appends postings to queue.txt."
     }
   ]
 }
