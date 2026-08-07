@@ -88,6 +88,37 @@ seen check below.
 Screen on the listing row first — title, company, location are visible there. Only open
 postings that survive that screen. Opening a posting is the expensive operation.
 
+## Working through keywords and pages
+
+Process KEYWORDS sequentially, in the order given: run one search per keyword, exhaust
+it (or hit a bound below), then move to the next keyword. Keep a per-keyword count of
+the lines you append — the summary reports it.
+
+For each keyword's search:
+
+1. Open the search URL for that keyword alone, with the location and freshness filter
+   applied.
+2. Read the stated total-results count near the top of the list. It is advisory only —
+   sites round it ("1,000+ results") and it counts rows that will fail your screen.
+   Use it to anticipate whether more pages exist, never as a loop target.
+3. The visible list lazy-loads (~25 rows per page on LinkedIn). Scroll the results
+   pane until the row count stops growing, bounded at 10 scroll attempts, before
+   screening the page's rows.
+4. Screen, open survivors, canonicalise, check, append — the rules in the sections
+   above and below, unchanged.
+5. Advance to the next page by URL: add or increase `start=` in steps of 25
+   (LinkedIn). If the new page renders empty or unchanged while the stated total says
+   more exist, fall back once to clicking the next-page control; if there is still
+   nothing new, the keyword is exhausted.
+
+A keyword's search ends at whichever comes first:
+
+- 20 pages (hard cap)
+- two consecutive pages yielding zero new qualifying postings
+- `start` past the stated total
+- MAX_RESULTS reached (global, across all keywords)
+- your turn budget running low (see Stopping)
+
 ## Appending
 
 Once a posting looks like a keeper, canonicalise its URL:
@@ -162,10 +193,20 @@ after it:
     OK APPENDED <n> EXHAUSTED
     OK APPENDED <n> MORE_AVAILABLE
 
+Append the per-keyword breakdown when you can:
+
+    OK APPENDED 15 MORE_AVAILABLE BY_KEYWORD "software engineer"=12,"frontend engineer"=3
+
 <n> is the number of lines you appended this call — count them, do not estimate.
 
-Use EXHAUSTED only when every source in scope ran out of qualifying postings. Reaching
-MAX_RESULTS, or stopping for turn budget, is MORE_AVAILABLE.
+BY_KEYWORD rules: echo each keyword exactly as the caller gave it, quoted — never any
+other text; include every keyword you attempted, even with `=0`; omit keywords you
+never reached; the counts must sum to <n>. If any keyword contains `"` or `=`, omit
+the whole suffix and return the plain form.
+
+Use EXHAUSTED only when every keyword on every source in scope ran out of qualifying
+postings before MAX_RESULTS. Reaching MAX_RESULTS, stopping for turn budget, or
+cutting a keyword off at the page cap is MORE_AVAILABLE.
 
 On failure, return one of these instead:
 
