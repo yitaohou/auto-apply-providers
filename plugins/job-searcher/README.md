@@ -24,6 +24,15 @@ a `sources=` directive in `requirements` in `data/search_profile.csv`:
 The value must be one of those three literals. Anything else is rejected rather than
 guessed at.
 
+## How it searches
+
+Keywords are processed one at a time, in the order given: each keyword's search is
+paginated — scrolling to trigger lazy-loading, then flipping pages — until it runs out
+of new postings or hits a 20-page cap, then the next keyword starts. The summary line
+reports how many postings each keyword contributed (the `BY_KEYWORD` suffix; requires
+auto-apply ≥ 0.2.0 to be relayed rather than rejected). Deeper crawling means more
+page loads per run — slightly more exposure to the rate limiting described below.
+
 ## What it does not do
 
 It never applies to a posting, saves it, or interacts with it in any way beyond reading
