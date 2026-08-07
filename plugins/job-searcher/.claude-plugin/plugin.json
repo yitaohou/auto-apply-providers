@@ -1,0 +1,6 @@
+{
+  "name": "job-searcher",
+  "description": "Provider for job.search@1 — browses LinkedIn and Indeed with ego lite and appends postings to queue.txt.",
+  "version": "0.1.0",
+  "author": { "name": "yitaohou" }
+}
