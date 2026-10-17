@@ -1,5 +1,11 @@
 # auto-apply-providers
 
+> **Archived (2026-10-14).** The provider/contract system was removed in
+> [auto-apply](https://github.com/yitaohou/auto-apply) v0.3.0. Both agents in this
+> repository (`email-code-reader`, `job-searcher`) now ship inside auto-apply itself
+> under `agents/`, with no registration step. Nothing here is maintained; install
+> auto-apply alone. The text below is kept for history.
+
 First-party capability providers for the [auto-apply](https://github.com/yitaohou/auto-apply)
 core plugin. Each provider is an independent plugin — install only what you need.
 Every provider implements a contract from the core's `contracts/` directory and
